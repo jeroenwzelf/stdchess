@@ -13,21 +13,25 @@ class Game {
         Game();
         Game(const Game& g)
             : moves(g.moves), previous(g.previous), state(g.state), _position(Position(g._position)) {}
+        Game(Game* g)
+            : moves(g->moves), previous(g->previous), state(g->state), _position(Position(g->_position)) {}
 
         void move(const Move& m);
+        void undo();
 
         Piece* getPiece(const Square& square) const;
         Position position() const;
 
         Piece::Color currentPlayer() const;
+        unsigned movesPlayed() const;
 
-        unsigned moves = 0;
         Game* previous = nullptr;
         enum class State { PLAYING } state;
 
         friend std::ostream& operator<<(std::ostream& os, const Game& p);
     private:
         Position _position;
+        unsigned moves = 0;
 };
 
 Game::Game() {
@@ -46,6 +50,7 @@ void Game::move(const Move& move) {
     if (orig_piece->color != currentPlayer())
         throw Move::IllegalMoveException("The current player can not move the piece on " + move.orig.toString());
 
+    previous = new Game(this);
     _position.move(move.orig, move.dest);
 
     if (move.type.special) {
@@ -85,6 +90,10 @@ Position Game::position() const {
 
 Piece::Color Game::currentPlayer() const {
     return (Piece::Color)(moves % 2 == 0);
+}
+
+unsigned Game::movesPlayed() const {
+    return moves;
 }
 
 std::ostream& operator<<(std::ostream& os, const Game& g) {

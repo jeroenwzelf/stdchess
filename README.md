@@ -39,3 +39,6 @@ For example:
     g7 g8 Q
 ```
 promotes your pawn to a queen.
+
+#### other
+You can undo by giving 'z' as input, and quit by giving 'q' as input.
