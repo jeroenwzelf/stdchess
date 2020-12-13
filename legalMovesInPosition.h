@@ -3,8 +3,10 @@
 #include "move.h"
 
 /*
- * Special moves for @position are defined here, and it could provide as
- * a base for implementing the other legal moves for specific pieces.
+ * Special moves for any position are defined here, and it could provide 
+ * as a base for implementing the other legal moves for specific pieces.
+ * 
+ * @param position: The position to calculate moves in.
 */
 struct LegalMovesInPosition {
     LegalMovesInPosition(const Position& position) : position(position) {}

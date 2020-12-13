@@ -6,15 +6,17 @@
 #include "square.h"
 
 /*
- * A simple chessboard containing chesspieces. A new Position is
- * instantiated with the default initial chessposition.
+ * A simple chessboard containing chesspieces. A new Position is 
+ * instantiated with the default initial chessposition. 
+ * Player::Color perspective is used for printing the board the 
+ * right side up for either White or Black.
  * 
- *      @perspective is used for printing the board the
- *      right side up for either White or Black.
+ * @param p: A position to copy the board from.
+ *                      
 */
 struct Position {
         Position();
-        Position(const Position& b);
+        Position(const Position& p);
 
         Piece* get(const Square& square) const;
 
@@ -54,10 +56,10 @@ Position::Position() {
         }
 }
 
-Position::Position(const Position& b) {
+Position::Position(const Position& p) {
         for (unsigned y = 0; y < 8; ++y) {
                 for (unsigned x = 0; x < 8; ++x) {
-                        Piece* piece = b.board[y][x];
+                        Piece* piece = p.board[y][x];
                         board[y][x] = piece ? new Piece(piece) : nullptr;
                 }
         }

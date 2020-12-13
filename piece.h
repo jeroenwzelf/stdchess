@@ -8,6 +8,9 @@
 
 /*
  * A chesspiece, printable as a unicode chess character.
+ * 
+ * @param type: The type of chesspiece.
+ * @param color: Whether the piece is White's or Black's.
 */
 struct Piece {
     enum Type {PAWN, ROOK, BISHOP, KNIGHT, KING, QUEEN } type;

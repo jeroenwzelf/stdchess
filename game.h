@@ -5,6 +5,8 @@
 /*
  * A simple implementation of a chessgame. It keeps track of the current
  * player (White or Black), the amount of moves played, and a game state.
+ * 
+ * @param g: The game to copy.
 */
 class Game {
     public:

@@ -4,10 +4,13 @@
 #include "exception.h"
 
 /*
- * A square on a chessboard. The coordinates can range from 0 to 7,
- * which translate to:
- *      * 1-8 for the y-axis.
- *      * a-h for the x-axis.
+ * A square on a chessboard. The coordinates can range from 0 to 7, 
+ * which translates to 
+ *      1-8 for the y-axis, 
+ *      a-h for the x-axis.
+ * 
+ * @param x: the location on the x-axis.
+ * @param y: the location on the y-axis.
 */
 class Square {
         public:
