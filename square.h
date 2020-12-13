@@ -3,6 +3,12 @@
 #include <string>
 #include "exception.h"
 
+/*
+ * A square on a chessboard. The coordinates can range from 0 to 7,
+ * which translate to:
+ *      * 1-8 for the y-axis.
+ *      * a-h for the x-axis.
+*/
 class Square {
         public:
                 Square(char x, unsigned y) : Square((unsigned)(std::tolower(x) - 'a'), y-1) {}
@@ -15,7 +21,7 @@ class Square {
                 std::string toString() const;
 
                 struct OutOfBoundsException : public Exception {
-                        OutOfBoundsException(std::string message) : Exception(message) {}
+                        OutOfBoundsException(const std::string& reason) : Exception(reason) {}
                 };
 };
 

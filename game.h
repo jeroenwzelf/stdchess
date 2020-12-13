@@ -2,6 +2,10 @@
 
 #include "move.h"
 
+/*
+ * A simple implementation of a chessgame. It keeps track of the current
+ * player (White or Black), the amount of moves played, and a game state.
+*/
 class Game {
     public:
         Game();

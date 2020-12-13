@@ -5,6 +5,13 @@
 #include "piece.h"
 #include "square.h"
 
+/*
+ * A simple chessboard containing chesspieces. A new Position is
+ * instantiated with the default initial chessposition.
+ * 
+ *      @perspective is used for printing the board the
+ *      right side up for either White or Black.
+*/
 struct Position {
         Position();
         Position(const Position& b);
@@ -58,7 +65,7 @@ Position::Position(const Position& b) {
 
 Piece* Position::get(const Square& square) const {
         return board[square.y][square.x];
-};
+}
 
 void Position::place(const Piece& piece, const Square& dest) {
         remove(dest);

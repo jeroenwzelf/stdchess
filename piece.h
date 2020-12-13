@@ -6,6 +6,9 @@
 
 #include "exception.h"
 
+/*
+ * A chesspiece, printable as a unicode chess character.
+*/
 struct Piece {
     enum Type {PAWN, ROOK, BISHOP, KNIGHT, KING, QUEEN } type;
     const enum class Color : bool { WHITE=true, BLACK=false } color;

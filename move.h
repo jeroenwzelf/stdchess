@@ -2,7 +2,18 @@
 
 #include "position.h"
 
+/*
+ * Represents a move on a chessboard. Sometimes, a move will involve moving
+ * than one more piece (like castling and taking en passent). These special
+ * cases are contained in @type.
+*/
 struct Move {
+    /*
+     * Whether a move is a special move. It can be disregarded if @special
+     * is false. If @piece is Piece::PAWN, the move is en passent. If
+     * @piece is Piece::King, castling is meant. Otherwise, the move is a
+     * pawn promotion.
+    */
     struct Type {
         Type() : special(false), piece(Piece::QUEEN) {}
 
@@ -22,7 +33,7 @@ struct Move {
     Move::Type type;
 
     struct IllegalMoveException : public Exception {
-        IllegalMoveException(std::string message) : Exception(message) {}
+        IllegalMoveException(const std::string& reason) : Exception(reason) {}
     };
 };
 
