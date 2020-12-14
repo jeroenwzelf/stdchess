@@ -1,6 +1,6 @@
 # stdchess
 For a mini code jam I decided to make a simple C++ implementation of a chess game. I wrote it in about 8 hours. Most standard chess restrictions are not implemented, just like on a regular 'analog' board.
-If you want to move your pawn to like a rook, you can. _Disclaimer: I am not responsible for pissing off your opponent._
+If you want to move your pawn like a rook, you can. _Disclaimer: I am not responsible for pissing off your opponent._
 
 Special moves like castling, promoting and en passant are possible (see below).
 The program prints every state to stdout after every move, and reads moves for both White and Black in stdin.
