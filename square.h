@@ -20,7 +20,7 @@ class Square {
                 const unsigned x, y;
                 
                 char x_char() const { return x + 'a'; }
-                char y_char() const { return y + '0'; }
+                char y_char() const { return y + '1'; }
                 std::string toString() const;
 
                 struct OutOfBoundsException : public Exception {

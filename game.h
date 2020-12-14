@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 #include "move.h"
 
 /*
@@ -11,10 +13,10 @@
 class Game {
     public:
         Game();
-        Game(const Game& g)
-            : moves(g.moves), previous(g.previous), state(g.state), _position(Position(g._position)) {}
+        // Game(const Game& g)
+        //     : previous_move(new Move(*g.previous_move)), previous(g.previous), state(g.state), _position(Position(g._position)) {}
         Game(Game* g)
-            : moves(g->moves), previous(g->previous), state(g->state), _position(Position(g->_position)) {}
+            : previous_move(g->previous_move ? new Move(*g->previous_move) : nullptr), previous(g->previous), state(g->state), _position(Position(g->_position)) {}
 
         void move(const Move& m);
         void undo();
@@ -22,16 +24,17 @@ class Game {
         Piece* getPiece(const Square& square) const;
         Position position() const;
 
-        Piece::Color currentPlayer() const;
-        unsigned movesPlayed() const;
-
         Game* previous = nullptr;
+        std::vector<Move*> moves() const;
+        Piece::Color currentPlayer() const;
+
         enum class State { PLAYING } state;
 
         friend std::ostream& operator<<(std::ostream& os, const Game& p);
     private:
         Position _position;
-        unsigned moves = 0;
+
+        Move* previous_move = nullptr;
 };
 
 Game::Game() {
@@ -51,6 +54,7 @@ void Game::move(const Move& move) {
         throw Move::IllegalMoveException("The current player can not move the piece on " + move.orig.toString());
 
     previous = new Game(this);
+    previous_move = new Move(move);
     _position.move(move.orig, move.dest);
 
     if (move.type.special) {
@@ -76,8 +80,6 @@ void Game::move(const Move& move) {
             }
         }
     }
-
-    ++moves;
 }
 
 Piece* Game::getPiece(const Square& square) const {
@@ -88,17 +90,30 @@ Position Game::position() const {
     return _position;
 }
 
-Piece::Color Game::currentPlayer() const {
-    return (Piece::Color)(moves % 2 == 0);
-}
+std::vector<Move*> Game::moves() const {
+    if (previous == nullptr)
+        return std::vector<Move*>();
 
-unsigned Game::movesPlayed() const {
+    std::vector<Move*> moves = previous->moves();
+    if (previous_move != nullptr)
+        moves.push_back(previous_move);
+
     return moves;
 }
 
+Piece::Color Game::currentPlayer() const {
+    return (Piece::Color)(moves().size() % 2 == 0);
+}
+
 std::ostream& operator<<(std::ostream& os, const Game& g) {
-    return os   << '\r' << "------------------------------------------------ MOVE "
-                        << g.moves << " (" << g.currentPlayer() << "\'s turn)" << std::endl
+    return os   << '\r' << "-------------------------------------- MOVE "
+                        << g.moves().size() << " (" << g.currentPlayer() << "\'s turn)" << std::endl
                 << g._position
                 << std::endl;
+}
+
+std::ostream& operator<<(std::ostream& os, const std::vector<Move*>& moves) {
+    for (unsigned i = 0; i < moves.size(); ++i)
+        os << i << ". " << *moves.at(i) << std::endl;
+    return os;
 }

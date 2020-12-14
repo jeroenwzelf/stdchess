@@ -39,7 +39,7 @@ Move parse(std::string input, const Game &g) {
         return LegalMovesInPosition(p).castling(g.currentPlayer(), Piece::QUEEN);
 
     if (input.length() != 5 && input.length() != 7)
-        throw Exception(std::to_string(input.length()) + ". Invalid input. Example: \'e2 e4\'");
+        throw Exception("Invalid input. Example: \'e2 e4\'");
 
     Square orig = Square(input[0], input[1] - '0');
     Square dest = Square(input[3], input[4] - '0');
@@ -59,14 +59,15 @@ int main() {
 
     while (true) {
         try {
+            std::cout << "moves: " << std::endl << g->moves() << std::endl;
             output(g);
             std::string input = read();
 
-            if (input.compare("z") == 0)
-                g = previous(g);
-
             if (input.compare("q") == 0)
                 return 0;
+
+            if (input.compare("z") == 0)
+                g = previous(g);
 
             else g->move(parse(input, g));
         } catch(const Exception &e) {
