@@ -4,7 +4,7 @@
 
 /*
  * Represents a move on a chessboard. Sometimes, a move will involve moving more 
- * than one more piece (like castling and taking en passent). These special cases 
+ * than one more piece (like castling and taking en passant). These special cases 
  * are contained in Move::Type type.
  * 
  * @param orig: The Square of the piece to move.
@@ -14,12 +14,12 @@
 struct Move {
     /*
      * Whether a move is a special move. It can be disregarded if @param special 
-     * is false. If {piece} is Piece::PAWN, the move is en passent. If 
+     * is false. If {piece} is Piece::PAWN, the move is en passant. If 
      * {piece} is Piece::King, castling is meant. Otherwise, the move is a 
      * pawn promotion.
      * 
      * @param special:  Whether the type should be disregarded or not.
-     * @param piece:    Used to indicate castling (with Piece::KING), en passent 
+     * @param piece:    Used to indicate castling (with Piece::KING), en passant 
      *                  (with Piece::PAWN), or promoting.
     */
     struct Type {

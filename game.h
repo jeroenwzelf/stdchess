@@ -68,7 +68,7 @@ void Game::move(const Move& move) {
                 _position.move(rook.orig, rook.dest);
                 break;
             }
-            // En passent
+            // En passant
             case Piece::PAWN: {
                 Square enemyPawn = Square(move.dest.x, move.dest.y + ((bool)currentPlayer() ? -1 : 1));
                 _position.remove(enemyPawn);

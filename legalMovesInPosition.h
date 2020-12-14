@@ -42,16 +42,16 @@ Move LegalMovesInPosition::enpassent(const Square& orig, const Square& dest) con
     Piece* enemy_pawn = position.get(enemy_pawn_orig);
 
     if (pawn->type != Piece::PAWN)
-        throw Move::IllegalMoveException("Only pawns can take en passent");
+        throw Move::IllegalMoveException("Only pawns can take en passant");
     
     if (enemy_pawn->type != Piece::PAWN)
-        throw Move::IllegalMoveException("You can only take other pawns en passent");
+        throw Move::IllegalMoveException("You can only take other pawns en passant");
 
     if (orig.x != dest.x+1 && orig.x != dest.x-1)
-        throw Move::IllegalMoveException("Taking en passent means taking a pawn");
+        throw Move::IllegalMoveException("Taking en passant means taking a pawn");
 
     if (orig.y != (bool)player ? 4 : 3)
-        throw Move::IllegalMoveException("Pawn is not on the correct rank to take en passent");
+        throw Move::IllegalMoveException("Pawn is not on the correct rank to take en passant");
 
     return Move(orig, dest, Move::Type(Piece::PAWN));
 }
